@@ -12,6 +12,13 @@ const port = 3001;
 
 const compiler = webpack(compilerOptions);
 
+app.use((req, res, next) => {
+    
+    if (req.url.endsWith('.br')) res.setHeader('Content-Encoding', 'br');
+    
+    next();
+});
+
 app.use(
     devMiddleware(compiler, {
         publicPath: compilerOptions.output.publicPath,
