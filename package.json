@@ -39,6 +39,8 @@
         "webpack-hot-middleware": "2.25.0"
     },
     "husky": {
-        "pre-commit": "yarn lint"
+        "hooks": {
+            "pre-commit": "yarn lint"
+        }
     }
 }
