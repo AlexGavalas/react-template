@@ -2,10 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HTMLPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-<<<<<<< HEAD
-const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin')
-=======
->>>>>>> 606f5963b1828957bc2e2cb2d363c995ced58884
+const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -20,32 +17,21 @@ const entry = [
 ];
 
 const plugins = [
-<<<<<<< HEAD
-=======
-    new CompressionPlugin({
-        filename: '[path].br',
-        algorithm: 'brotliCompress',
-        compressionOptions: { level: 11 },
-        threshold: 10240,
-        minRatio: 0.8,
-    }),
->>>>>>> 606f5963b1828957bc2e2cb2d363c995ced58884
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HTMLPlugin({
         filename: 'index.html',
         template: path.resolve(__dirname, 'src/index.html'),
         favicon: path.resolve(__dirname, 'src/assets/favicon.ico'),
-<<<<<<< HEAD
-        jsExtension: '.br',
-=======
->>>>>>> 606f5963b1828957bc2e2cb2d363c995ced58884
+        jsExtension: isDev ? '.js' : '.br',
         minify: {
             removeComments: true,
             collapseWhitespace: true,
         },
     }),
-<<<<<<< HEAD
+];
+
+const prodPlugins = [
     new CompressionPlugin({
         filename: '[path].br',
         algorithm: 'brotliCompress',
@@ -55,9 +41,9 @@ const plugins = [
         minRatio: 0.8,
     }),
     new HtmlWebpackChangeAssetsExtensionPlugin(),
-=======
->>>>>>> 606f5963b1828957bc2e2cb2d363c995ced58884
 ];
+
+if (!isDev) plugins.push(...prodPlugins);
 
 module.exports = {
     mode: isDev ? 'development' : 'production',
@@ -76,8 +62,7 @@ module.exports = {
             },
         },
     },
-    optimization: {
-    },
+    devtool: 'cheap-module-eval-source-map',
     module: {
         rules: [
             {
