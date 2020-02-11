@@ -1,41 +1,43 @@
-import path from 'path';
-import webpack from 'webpack';
-import HTMLPlugin from 'html-webpack-plugin';
+const path = require('path');
 
-const entry = [
-    'react-hot-loader/patch',
-    'webpack-hot-middleware/client?reload=true&quiet=true',
-    path.resolve(__dirname, 'src/index.js'),
-];
+const HTMLPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin');
 
 const plugins = [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new HTMLPlugin({
         filename: 'index.html',
         template: path.resolve(__dirname, 'src/index.html'),
         favicon: path.resolve(__dirname, 'src/assets/favicon.ico'),
+        jsExtension: '.br',
         minify: {
             removeComments: true,
             collapseWhitespace: true,
         },
     }),
+    new CompressionPlugin({
+        filename: '[path].br',
+        algorithm: 'brotliCompress',
+        test: /\.jsx?$/,
+        compressionOptions: { level: 11 },
+        threshold: 10240,
+        minRatio: 0.8,
+        deleteOriginalAssets: true,
+    }),
+    new HtmlWebpackChangeAssetsExtensionPlugin(),
 ];
 
-export default {
-    mode: 'development',
+module.exports = {
+    mode: 'production',
     target: 'web',
-    entry,
+    entry: path.resolve(__dirname, 'src/index.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
-        filename: '[name].[hash].js',
+        filename: '[name].[contenthash].js',
     },
     resolve: {
         extensions: ['.js', '.jsx'],
-        alias: {
-            'react-dom': '@hot-loader/react-dom',
-        },
     },
     devtool: 'cheap-module-eval-source-map',
     module: {
