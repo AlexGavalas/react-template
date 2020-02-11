@@ -7,11 +7,13 @@
         "node": "12.16.0"
     },
     "scripts": {
-        "start": "cross-env NODE_ENV=development babel-node server",
+        "start": "cross-env NODE_ENV=development babel-watch server",
         "start:prod": "cross-env NODE_ENV=production babel-node server",
+        "prebuild:server": "yarn clean",
+        "build:server": "babel server --out-dir server-dist --copy-files",
         "prebuild": "yarn clean",
         "build": "webpack --config webpack.config.prod.js",
-        "clean": "rimraf dist",
+        "clean": "rimraf dist server-dist",
         "lint": "eslint src server"
     },
     "dependencies": {
@@ -27,6 +29,7 @@
         "@babel/preset-react": "7.8.3",
         "@hot-loader/react-dom": "16.11.0",
         "babel-loader": "8.0.6",
+        "babel-watch": "7.0.0",
         "compression-webpack-plugin": "3.1.0",
         "eslint": "6.8.0",
         "eslint-plugin-react": "7.18.3",

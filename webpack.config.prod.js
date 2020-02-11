@@ -17,9 +17,8 @@ const plugins = [
     new CompressionPlugin({
         filename: '[path].br',
         algorithm: 'brotliCompress',
-        test: /\.jsx?$/,
+        test: /\.js(x)?$/,
         compressionOptions: { level: 11 },
-        threshold: 10240,
         minRatio: 0.8,
         deleteOriginalAssets: true,
     }),
