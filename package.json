@@ -31,6 +31,7 @@
         "babel-loader": "8.0.6",
         "babel-watch": "7.0.0",
         "compression-webpack-plugin": "3.1.0",
+        "core-js": "3.6.4",
         "eslint": "6.8.0",
         "eslint-plugin-react": "7.18.3",
         "html-webpack-change-assets-extension-plugin": "1.2.0",
@@ -49,5 +50,9 @@
         "hooks": {
             "pre-commit": "yarn lint"
         }
-    }
+    },
+    "browsersList": [
+        "not ie",
+        "> 1%"
+    ]
 }
