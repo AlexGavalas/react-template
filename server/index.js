@@ -1,7 +1,8 @@
+import 'dotenv/config';
 import { logInfo } from './util/logger';
 import server from './server';
 
-const PORT = 3001;
+const PORT = process.env.SERVER_PORT;
 
 server.listen(PORT, () => {
     
