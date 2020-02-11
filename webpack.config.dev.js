@@ -39,6 +39,7 @@ const prodPlugins = [
         compressionOptions: { level: 11 },
         threshold: 10240,
         minRatio: 0.8,
+        deleteOriginalAssets: true,
     }),
     new HtmlWebpackChangeAssetsExtensionPlugin(),
 ];
