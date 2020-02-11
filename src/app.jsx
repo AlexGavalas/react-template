@@ -1,10 +1,8 @@
 import React from 'react';
-import { AppContainer } from 'react-hot-loader';
+import { hot } from 'react-hot-loader/root';
 
 const App = () => (
-    <AppContainer>
-        <h1>HEY 112s!</h1>
-    </AppContainer>
+    <h1>HEY REACT!</h1>
 );
 
-export default App;
+export default hot(App);
