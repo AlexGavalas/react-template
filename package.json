@@ -2,6 +2,10 @@
     "name": "react-template",
     "version": "1.0.0",
     "private": true,
+    "engines": {
+        "yarn": "1.22.0",
+        "node": "12.15.0"
+    },
     "scripts": {
         "start": "cross-env NODE_ENV=development babel-node server",
         "prebuild": "yarn clean",
