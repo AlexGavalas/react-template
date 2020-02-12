@@ -41,18 +41,18 @@ const plugins = [
         theme_color: '#055',
         start_url: '.',
         display: 'standalone',
-        ios: {
-            'apple-touch-icon': path.resolve('src/assets/apple-touch-icon.png'),
-        },
+        inject: true,
+        ios: true,
         icons: [
             {
-                src: path.resolve('src/assets/favicon.ico'),
-                sizes: [128, 192, 256, 512],
+                src: path.resolve('src/assets/android-chrome-512x512.png'),
+                sizes: [72, 96, 128, 144, 192, 384, 512],
                 destination: '/favicons',
             },
             {
                 src: path.resolve('src/assets/android-chrome-512x512.png'),
-                sizes: [128, 192, 256, 512],
+                sizes: [120, 152, 167, 180],
+                ios: true,
                 destination: '/favicons',
             },
         ],
