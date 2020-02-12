@@ -1,6 +1,9 @@
 const path = require('path');
 const HTMLPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin');
 
 const plugins = [
@@ -11,7 +14,7 @@ const plugins = [
         jsExtension: '.br',
         minify: {
             removeComments: true,
-            collapseWhitespace: true,
+            collapseWhitespace: true
         },
     }),
     new CompressionPlugin({
@@ -20,9 +23,44 @@ const plugins = [
         test: /\.js(x)?$/,
         compressionOptions: { level: 11 },
         minRatio: 0.8,
-        deleteOriginalAssets: true,
+        deleteOriginalAssets: true
     }),
     new HtmlWebpackChangeAssetsExtensionPlugin(),
+    new WorkboxPlugin.GenerateSW({
+        runtimeCaching: [
+            {
+                urlPattern: /\.br$/,
+                handler: 'StaleWhileRevalidate',
+            },
+        ],
+    }),
+    new WebpackPwaManifest({
+        name: 'React Template',
+        short_name: 'RT',
+        description: 'My awesome react template',
+        background_color: '#055',
+        theme_color: '#055',
+        start_url: '.',
+        display: 'standalone',
+        icons: [
+            {
+                src: path.resolve('src/assets/favicon.ico'),
+                sizes: [96, 128, 192, 256, 512],
+                destination: '/favicons',
+            },
+            {
+                src: path.resolve('src/assets/android-chrome-512x512.png'),
+                sizes: [96, 128, 192, 256, 512],
+                destination: '/favicons',
+            },
+        ],
+    }),
+    new CopyPlugin([
+        { 
+            from: path.resolve(__dirname, 'src/assets'),
+            to: path.resolve(__dirname, 'dist/assets'), 
+        },
+    ]),
 ];
 
 module.exports = {

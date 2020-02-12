@@ -11,6 +11,7 @@ const entry = [
 const plugins = [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new HTMLPlugin({
         filename: 'index.html',
         template: path.resolve(__dirname, 'src/index.html'),
