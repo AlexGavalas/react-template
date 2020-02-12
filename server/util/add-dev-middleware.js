@@ -11,7 +11,7 @@ export const configure = (app) => {
     app.use(
         devMiddleware(compiler, {
             publicPath: compilerOptions.output.publicPath,
-            logLevel: 'silent',
+            logLevel: 'error',
         })
     );
     
