@@ -3,7 +3,6 @@ const HTMLPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin');
 
 const plugins = [
@@ -42,25 +41,22 @@ const plugins = [
         theme_color: '#055',
         start_url: '.',
         display: 'standalone',
+        ios: {
+            'apple-touch-icon': path.resolve('src/assets/apple-touch-icon.png'),
+        },
         icons: [
             {
                 src: path.resolve('src/assets/favicon.ico'),
-                sizes: [96, 128, 192, 256, 512],
+                sizes: [128, 192, 256, 512],
                 destination: '/favicons',
             },
             {
                 src: path.resolve('src/assets/android-chrome-512x512.png'),
-                sizes: [96, 128, 192, 256, 512],
+                sizes: [128, 192, 256, 512],
                 destination: '/favicons',
             },
         ],
     }),
-    new CopyPlugin([
-        { 
-            from: path.resolve(__dirname, 'src/assets'),
-            to: path.resolve(__dirname, 'dist/assets'), 
-        },
-    ]),
 ];
 
 module.exports = {
