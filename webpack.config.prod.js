@@ -1,4 +1,5 @@
 const path = require('path');
+
 const HTMLPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
@@ -75,7 +76,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
     },
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'none',
     module: {
         rules: [
             {
