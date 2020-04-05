@@ -31,6 +31,9 @@ const plugins = [
     }),
     new HtmlWebpackChangeAssetsExtensionPlugin(),
     new WorkboxPlugin.GenerateSW({
+        exclude: [
+            /\.html$/,
+        ],
         runtimeCaching: [
             {
                 urlPattern: /\.br$/,
