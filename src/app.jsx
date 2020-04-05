@@ -11,11 +11,11 @@ const App = () => (
             <form className={styles.loginForm}>
                 <div className={styles.formItem}>
                     <label htmlFor="username">Username</label>
-                    <input name="username" autoComplete="off" />
+                    <input id="username" name="username" autoComplete="off" />
                 </div>
                 <div className={styles.formItem}>
                     <label htmlFor="password">Password</label>
-                    <input name="password" type="password" autoComplete="off" />
+                    <input id="password" name="password" type="password" autoComplete="off" />
                 </div>
             </form>
         </main>
