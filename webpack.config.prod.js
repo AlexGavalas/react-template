@@ -6,6 +6,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin');
+const glob = require('glob');
 
 const plugins = [
     new MiniCssExtractPlugin({
@@ -106,6 +107,14 @@ module.exports = {
                             plugins: () => [
                                 require('cssnano'),
                                 require('autoprefixer'),
+                                require('@fullhuman/postcss-purgecss')({
+                                    content: glob.sync('src/**/*.{js,jsx}', { nodir: true }),
+                                    whitelist: [
+                                        'body',
+                                        'label',
+                                        'input',
+                                    ],
+                                }),
                             ],
                         },
                     },
@@ -118,7 +127,7 @@ module.exports = {
                 test: /\.svg$/,
                 exclude: /node_modules/,
                 use: [
-                    'url-loader',
+                    'file-loader',
                 ],
             },
         ],
