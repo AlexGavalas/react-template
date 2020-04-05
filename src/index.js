@@ -1,16 +1,21 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { render, unmountComponentAtNode } from 'react-dom';
 
-import App from './app';
+import App from './app.jsx';
 
 const ROOT_NODE = document.getElementById('root');
 
 render(<App />, ROOT_NODE);
     
-module.hot?.accept('./app', () => {
+if (module.hot) {
+
+    module.hot.accept('./app', () => {
+        
+        unmountComponentAtNode(ROOT_NODE);
     
-    render(<App />, ROOT_NODE);
-});
+        render(<App />, ROOT_NODE);
+    });
+}
 
 if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     

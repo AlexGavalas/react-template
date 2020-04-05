@@ -1,2 +1,46 @@
-.main
-    color: red
+body
+    margin: 0
+    padding: 0
+    overflow: hidden
+
+.background
+    background: url('./assets/images/background.svg')
+    min-height: 100%
+    min-width: 100%
+    z-index: -1
+    position: absolute
+    top: 0
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+.center
+    height: 80vh
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+
+.formHeader
+    color: #000
+
+.loginForm
+    background-color: #3280bd
+    box-shadow: 0px 0px 73px 32px rgba(0,0,0,0.7);
+    border: 2px solid black
+    border-radius: 10px
+    padding: 2vw
+
+.formItem
+    display: flex
+    flex-direction: column
+    margin: 2vh
+
+    label
+        color: white
+
+    input
+        border-radius: 5px
+        border: none
+        outline: none
+        padding: 1vh
