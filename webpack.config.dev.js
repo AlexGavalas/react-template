@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HTMLPlugin from 'html-webpack-plugin';
+import WebpackPwaManifest from 'webpack-pwa-manifest';
 
 const entry = [
     'react-hot-loader/patch',
@@ -17,6 +18,8 @@ const plugins = [
         template: path.resolve(__dirname, 'src/index.html'),
         favicon: path.resolve(__dirname, 'src/assets/favicon.ico'),
     }),
+    // Minimum dev manifest
+    new WebpackPwaManifest(),
 ];
 
 export default {

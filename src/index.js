@@ -1,21 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import App from './app.jsx';
+import App from './app';
 
-const rootNode = document.getElementById('root');
+const ROOT_NODE = document.getElementById('root');
 
-render(<App />, rootNode);
-
-if (module.hot) {
+render(<App />, ROOT_NODE);
     
-    module.hot.accept('./app.jsx', () => {
-
-        const NewApp = require('./app.jsx').default;
-        
-        render(<NewApp />, rootNode);
-    });
-}
+module.hot?.accept('./app', () => {
+    
+    render(<App />, ROOT_NODE);
+});
 
 if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     
