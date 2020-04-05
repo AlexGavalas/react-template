@@ -31,10 +31,11 @@ const plugins = [
     }),
     new HtmlWebpackChangeAssetsExtensionPlugin(),
     new WorkboxPlugin.GenerateSW({
-        exclude: [
-            /\.html$/,
-        ],
         runtimeCaching: [
+            {
+                urlPattern: /\.(html|json|png|css)$/,
+                handler: 'NetworkFirst',
+            },
             {
                 urlPattern: /\.br$/,
                 handler: 'StaleWhileRevalidate',
