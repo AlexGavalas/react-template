@@ -69,14 +69,6 @@
         "webpack-pwa-manifest": "4.2.0",
         "workbox-webpack-plugin": "5.1.2"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": [
-                "yarn lint",
-                "yarn lint:sass"
-            ]
-        }
-    },
     "browserslist": {
         "production": [
             "> 0.2%",
