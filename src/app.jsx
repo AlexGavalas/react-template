@@ -1,25 +1,28 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
+import { Switch, withRouter } from 'react-router';
+import { Route, Redirect, BrowserRouter } from 'react-router-dom';
+
+import { Login } from './components/login';
 
 import styles from './_app.sass';
 
-const App = () => (
+const ToHome = () => <Redirect to="/" />;
+
+const App = withRouter(() => (
     <>
         <div className={styles.background} />
-        <main className={styles.center}>
-            <h2 className={styles.formHeader}>Login</h2>
-            <form className={styles.loginForm}>
-                <div className={styles.formItem}>
-                    <label htmlFor="username">Username</label>
-                    <input id="username" name="username" autoComplete="off" />
-                </div>
-                <div className={styles.formItem}>
-                    <label htmlFor="password">Password</label>
-                    <input id="password" name="password" type="password" autoComplete="off" />
-                </div>
-            </form>
-        </main>
+        <Switch>
+            <Route path="/" component={Login} />
+            <Route component={ToHome} />
+        </Switch>
     </>
+));
+
+const WithRouter = () => (
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 );
 
-export default hot(App);
+export default hot(WithRouter);

@@ -55,6 +55,8 @@
         "react": "16.13.1",
         "react-dom": "16.13.1",
         "react-hot-loader": "4.12.20",
+        "react-router": "5.1.2",
+        "react-router-dom": "5.1.2",
         "redux-observable": "1.2.0",
         "rimraf": "3.0.2",
         "rxjs": "6.5.5",

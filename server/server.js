@@ -17,4 +17,8 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
+app.use((req, res) => {
+    res.redirect('/');
+});
+
 export default app;
