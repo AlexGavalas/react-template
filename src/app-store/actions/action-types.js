@@ -1,1 +1,1 @@
-export const HELLO = 'Hello world action!';
+export const LOGIN = '[user] Login the user';

@@ -1,6 +1,8 @@
 import path from 'path';
 import express from 'express';
 
+import login from './routes/login';
+
 const app = express();
 
 app.use((req, res, next) => {
@@ -14,6 +16,8 @@ if (process.env.NODE_ENV === 'development') {
 
     require('./util/add-dev-middleware').configure(app);
 }
+
+login.register(app);
 
 app.use(express.static(path.resolve(__dirname, '../dist')));
 

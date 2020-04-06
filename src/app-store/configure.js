@@ -27,7 +27,7 @@ const configure = (initialState) => {
     const composeEnhancers = !isProd && reduxDevTools ? reduxDevTools({ shouldHotReload: false }) : compose;
 
     const store = createStore(
-        createReducer(),
+        createReducer,
         initialState,
         composeEnhancers(...enhancers),
     );
