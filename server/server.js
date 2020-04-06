@@ -1,9 +1,12 @@
 import path from 'path';
 import express from 'express';
+import compression from 'compression';
 
 import login from './routes/login';
 
 const app = express();
+
+app.use(compression());
 
 app.use((req, res, next) => {
     
@@ -20,6 +23,8 @@ if (process.env.NODE_ENV === 'development') {
 login.register(app);
 
 app.use(express.static(path.resolve(__dirname, '../dist')));
+
+app.get('/robots.txt', (req, res) => res.sendFile(path.resolve(__dirname, './robots.txt')));
 
 app.use((req, res) => {
     res.redirect('/');
