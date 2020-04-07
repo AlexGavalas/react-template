@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { loginAction } from '../../app-store/actions';
+import { useStateFromEvent } from '../../util/custom-hooks';
 
 import styles from './login.styles.sass';
-
-const useStateFromEvent = (initialValue) => {
-    
-    const [val, setVal] = useState(initialValue);
-
-    const handleValueChange = ({ target: { value } }) => setVal(value);
-    
-    return [val, handleValueChange];
-};
 
 const useLogin = () => {
     
