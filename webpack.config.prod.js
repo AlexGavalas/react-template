@@ -109,10 +109,9 @@ module.exports = {
                                 require('autoprefixer'),
                                 require('@fullhuman/postcss-purgecss')({
                                     content: glob.sync('src/**/*.{js,jsx}', { nodir: true }),
-                                    whitelist: [
-                                        'body',
-                                        'label',
-                                        'input',
+                                    // Whitelist all html tags
+                                    whitelistPatterns: [
+                                        /^[^.]/
                                     ],
                                 }),
                             ],
