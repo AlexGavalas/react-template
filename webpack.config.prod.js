@@ -32,6 +32,8 @@ const plugins = [
     }),
     new HtmlWebpackChangeAssetsExtensionPlugin(),
     new WorkboxPlugin.GenerateSW({
+        clientsClaim: true,
+        skipWaiting: true,
         runtimeCaching: [
             {
                 urlPattern: /\.(html|json|png|css)$/,
