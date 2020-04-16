@@ -1,28 +1,31 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
-import { Switch, withRouter } from 'react-router';
-import { Route, Redirect, BrowserRouter } from 'react-router-dom';
-
-import { Login } from './components/login';
+import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 
 import configureStore from './app-store/configure';
 
 import styles from './_app.sass';
 
+const Login = lazy(() => import('./components/login'));
+const Home = lazy(() => import('./components/home'));
+
 const store = configureStore();
 
 const ToHome = () => <Redirect to="/" />;
 
-const App = withRouter(() => (
+const App = () => (
     <>
         <div className={styles.background} />
-        <Switch>
-            <Route path="/" component={Login} />
-            <Route component={ToHome} />
-        </Switch>
+        <Suspense fallback={null}>
+            <Switch>
+                <Route path="/" component={Login} />
+                <Route path="/home" component={Home} />
+                <Route component={ToHome} />
+            </Switch>
+        </Suspense>
     </>
-));
+);
 
 const WithRouter = () => (
     <BrowserRouter>

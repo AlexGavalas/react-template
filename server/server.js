@@ -4,12 +4,16 @@ import compression from 'compression';
 
 import login from './routes/login';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const app = express();
 
 app.use(compression());
 
 app.use((req, res, next) => {
     
+    if (isProd && req.url.includes('chunk')) req.url += '.br';
+
     if (req.url.endsWith('.br')) res.setHeader('Content-Encoding', 'br');
     
     next();
