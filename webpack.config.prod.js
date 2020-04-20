@@ -7,17 +7,31 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const glob = require('glob');
 
-const findAssets = (assetTags, query) => assetTags.headTags
-    .filter((item) => item.attributes.src && item.attributes.src.startsWith(`/${query}`));
+const findAssets = (assetTags, query) => assetTags.headTags.filter(({ attributes: { src = '' } }) => src.startsWith(`/${query}`));
 
 const plugins = [
     new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css'
+        filename: '[name].[contenthash].css',
     }),
     new HTMLPlugin({
         filename: 'index.html',
         template: path.resolve(__dirname, 'src/index.html'),
         templateParameters: (compilation, assets, assetTags, options) => {
+            // Preload css
+            assetTags.headTags
+                .filter(({ attributes: { href = '' } }) => href.endsWith('.css'))
+                .forEach(({ attributes }) => {
+                    attributes.rel = 'preload stylesheet';
+                    attributes.as = 'style';
+                });
+
+            // Preload js
+            assetTags.headTags
+                .filter(({ attributes: { src = '' } }) => src.endsWith('.js'))
+                .forEach(({ attributes }) => {
+                    attributes.rel = 'preload';
+                    attributes.as = 'script';
+                });
 
             // Because we compress the module bundle we need to change its filename
             // to include the extension
@@ -54,6 +68,7 @@ const plugins = [
     new WorkboxPlugin.GenerateSW({
         clientsClaim: true,
         skipWaiting: true,
+        inlineWorkboxRuntime: true,
         runtimeCaching: [
             {
                 urlPattern: /\.(json|png|css)$/,
@@ -96,7 +111,7 @@ module.exports = {
     target: 'web',
     entry: {
         main: [
-            path.resolve(__dirname, 'src/index.js')
+            path.resolve(__dirname, 'src/index.js'),
         ],
     },
     output: {
@@ -115,7 +130,7 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: [
-                    'babel-loader'
+                    'babel-loader',
                 ],
             },
             {
@@ -140,7 +155,7 @@ module.exports = {
                                     content: glob.sync('src/**/*.{js,jsx}', { nodir: true }),
                                     // Whitelist all html tags
                                     whitelistPatterns: [
-                                        /^[^.]/
+                                        /^[^.]/,
                                     ],
                                 }),
                             ],
