@@ -7,3 +7,20 @@ not op_mini all
 last 1 chrome version
 last 1 firefox version
 last 1 safari version
+
+[modern]
+last 2 Chrome versions
+last 2 Safari versions
+last 2 iOS versions
+last 2 Firefox versions
+last 2 Edge versions
+not Chrome < 60
+not Safari < 10.1
+not iOS < 10.3
+not Firefox < 54
+not Edge < 15
+
+[legacy]
+> 1%
+last 2 versions
+Firefox ESR

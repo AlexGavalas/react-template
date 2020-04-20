@@ -12,7 +12,7 @@
         "prebuild:server": "rimraf server-dist",
         "build:server": "babel server --out-dir server-dist --copy-files",
         "prebuild": "rimraf dist",
-        "build": "webpack --config webpack.config.prod.js",
+        "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
         "clean": "rimraf dist server-dist",
         "lint": "eslint src server",
         "lint:sass": "stylelint src/**/*.sass"
@@ -45,7 +45,6 @@
         "eslint-plugin-react": "7.19.0",
         "file-loader": "6.0.0",
         "glob": "7.1.6",
-        "html-webpack-change-assets-extension-plugin": "1.2.0",
         "html-webpack-plugin": "4.2.0",
         "husky": "4.2.5",
         "mini-css-extract-plugin": "0.9.0",

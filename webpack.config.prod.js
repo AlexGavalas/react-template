@@ -2,24 +2,45 @@ const path = require('path');
 
 const HTMLPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const glob = require('glob');
+
+const findAssets = (assetTags, query) => assetTags.headTags
+    .filter((item) => item.attributes.src && item.attributes.src.startsWith(`/${query}`));
 
 const plugins = [
     new MiniCssExtractPlugin({
         filename: '[name].[contenthash].css'
-    }), 
+    }),
     new HTMLPlugin({
         filename: 'index.html',
         template: path.resolve(__dirname, 'src/index.html'),
+        templateParameters: (compilation, assets, assetTags, options) => {
+
+            // Because we compress the module bundle we need to change its filename
+            // to include the extension
+            const [moduleItem] = findAssets(assetTags, 'main');
+
+            moduleItem.attributes.src += '.br';
+
+            assets.js = assets.js.map((item) => item.startsWith('/main') ? `${item}.br` : item);
+
+            return {
+                compilation,
+                webpackConfig: compilation.options,
+                htmlWebpackPlugin: {
+                    tags: assetTags,
+                    files: assets,
+                    options,
+                },
+            };
+        },
         favicon: path.resolve(__dirname, 'src/assets/favicon.ico'),
-        jsExtension: '.br',
+        scriptLoading: 'defer',
         minify: {
             removeComments: true,
-            collapseWhitespace: true
         },
     }),
     new CompressionPlugin({
@@ -28,19 +49,18 @@ const plugins = [
         test: /\.js(x)?$/,
         compressionOptions: { level: 11 },
         minRatio: 0.8,
-        deleteOriginalAssets: true
+        deleteOriginalAssets: true,
     }),
-    new HtmlWebpackChangeAssetsExtensionPlugin(),
     new WorkboxPlugin.GenerateSW({
         clientsClaim: true,
         skipWaiting: true,
         runtimeCaching: [
             {
-                urlPattern: /\.(html|json|png|css)$/,
+                urlPattern: /\.(json|png|css)$/,
                 handler: 'NetworkFirst',
             },
             {
-                urlPattern: /\.br$/,
+                urlPattern: /\.(br|js)$/,
                 handler: 'StaleWhileRevalidate',
             },
         ],
@@ -74,7 +94,11 @@ const plugins = [
 module.exports = {
     mode: 'production',
     target: 'web',
-    entry: path.resolve(__dirname, 'src/index.js'),
+    entry: {
+        main: [
+            path.resolve(__dirname, 'src/index.js')
+        ],
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
@@ -90,7 +114,9 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: ['babel-loader'],
+                use: [
+                    'babel-loader'
+                ],
             },
             {
                 test: /\.(sass|css)$/,
@@ -120,9 +146,7 @@ module.exports = {
                             ],
                         },
                     },
-                    {
-                        loader: 'sass-loader',
-                    },
+                    'sass-loader',
                 ],
             },
             {
