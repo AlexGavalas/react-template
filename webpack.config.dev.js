@@ -33,7 +33,7 @@ export default {
         chunkFilename: 'chunk-[name].[contenthash].js',
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.sass'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
         },

@@ -3,12 +3,12 @@ import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 
-import configureStore from './app-store/configure';
+import configureStore from '@store/configure';
 
-import styles from './_app.sass';
+import styles from '_app.sass';
 
-const Login = lazy(() => import('./components/login'));
-const Home = lazy(() => import('./components/home'));
+const Login = lazy(() => import('@components/login'));
+const Home = lazy(() => import('@components/home'));
 
 const store = configureStore();
 

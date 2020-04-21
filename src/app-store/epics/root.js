@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable';
 
-import login$ from './login';
+import login$ from '@store/epics/login';
 
 const epics = [
     login$,

@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@store": ["src/app-store/*"],
+            "@util": ["src/util/*"],
+            "@components": ["src/components/*"],
+            "@assets": ["src/assets/*]"
+        }
+    },
+    "exclude": ["node_modules"]
+}

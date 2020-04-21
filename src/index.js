@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 
-import App from './app.jsx';
+import App from './app';
 
 const ROOT_NODE = document.getElementById('root');
 

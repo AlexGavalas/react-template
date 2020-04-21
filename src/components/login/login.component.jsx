@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { loginAction } from '../../app-store/actions';
-import { useStateFromEvent } from '../../util/custom-hooks';
+import { loginAction } from '@store/actions';
+import { useStateFromEvent } from '@util/custom-hooks';
 
-import styles from './login.styles.sass';
+import styles from '@components/login/login.styles';
 
 const useLogin = () => {
     

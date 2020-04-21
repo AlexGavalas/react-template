@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { switchMap, pluck, map } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 
-import { loginAction } from '../actions';
+import { loginAction } from '@store/actions';
 
 const headers = { 'Content-Type': 'application/json' };
 

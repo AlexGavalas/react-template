@@ -1,4 +1,4 @@
-import user from './user';
+import user from '@store/reducers/user';
 
 const createReducer = (injectedReducers = {}) => ({
     user,

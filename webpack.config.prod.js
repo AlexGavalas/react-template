@@ -121,7 +121,7 @@ module.exports = {
         chunkFilename: 'chunk-[name].[contenthash].js',
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.sass'],
     },
     devtool: 'none',
     module: {

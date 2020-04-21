@@ -10,7 +10,21 @@
         "@babel/preset-react"
     ],
     "plugins": [
-        "@babel/plugin-proposal-optional-chaining"
+        "@babel/plugin-proposal-optional-chaining",
+        [
+            "module-resolver", 
+            {
+                "root": [
+                    "./src"
+                ],
+                "alias": {
+                    "@store": "./src/app-store",
+                    "@util": "./src/util",
+                    "@components": "./src/components",
+                    "@assets": "./src/assets"
+                }
+            }
+        ]
     ],
     "env": {
         "development": {

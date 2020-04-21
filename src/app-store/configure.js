@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from '@reduxjs/toolkit';
 import { createEpicMiddleware } from 'redux-observable';
 
-import createReducer from './reducers/root';
-import rootEpic from './epics/root';
+import createReducer from '@store/reducers/root';
+import rootEpic from '@store/epics/root';
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -12,7 +12,7 @@ const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 
 const enableHotReload = (store) => {
 
-    module.hot?.accept('./reducers', () => {
+    module.hot?.accept('@store/reducers', () => {
 
         store.replaceReducer(createReducer(store.injectedReducers));
     });
