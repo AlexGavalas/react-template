@@ -5,7 +5,7 @@
             "@store": ["src/app-store/*"],
             "@util": ["src/util/*"],
             "@components": ["src/components/*"],
-            "@assets": ["src/assets/*]"
+            "@assets": ["src/assets/*"]
         }
     },
     "exclude": ["node_modules"]
