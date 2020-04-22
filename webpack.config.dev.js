@@ -44,7 +44,9 @@ export default {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: ['babel-loader'],
+                use: [
+                    'babel-loader'
+                ],
             },
             {
                 test: /\.(sass|css)$/,
@@ -66,16 +68,14 @@ export default {
                             ],
                         },
                     },
-                    {
-                        loader: 'sass-loader',
-                    },
+                    'sass-loader',
                 ],
             },
             {
                 test: /\.svg$/,
                 exclude: /node_modules/,
                 use: [
-                    'url-loader',
+                    'file-loader',
                 ],
             },
         ],
